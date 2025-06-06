@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Chamado extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id_chamado';
     protected $fillable = [
-        'user_id', // Adicione 'user_id' aqui
+        'id_chamado', // Adicione 'user_id' aqui
         'titulo',
         'descricao',
         'prioridade',
@@ -18,7 +18,13 @@ class Chamado extends Model
         // Adicione outros campos que você permite mass assignment
     ];
 
-    // Defina os relacionamentos (se houver)
+    public function anexos()
+    {
+        return $this->hasMany(Anexo::class, 'id_chamado', 'id_chamado');
+        // 'id_chamado' é a FK na tabela 'anexos'
+        // 'id_chamado' é a PK na tabela 'chamados'
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

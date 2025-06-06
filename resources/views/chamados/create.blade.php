@@ -44,6 +44,7 @@
                         <input type="file" name="anexos[]" id="anexos" multiple class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600">
                         @error('anexos')
                             <p class="text-red-500 text-xs italic mt-2 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex items-center justify-between">

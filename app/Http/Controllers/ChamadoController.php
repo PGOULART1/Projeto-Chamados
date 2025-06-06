@@ -63,7 +63,8 @@ class ChamadoController extends Controller
             'status' => 'aberto', // **IMPORTANTE: Defina um status inicial aqui**
         ]);
 
-        return redirect()->route('chamados.index')->with('success', 'Chamado criado com sucesso!'); // Redireciona para a lista de chamados
+         return redirect()->route('chamados.show')
+                 ->with('success', 'Chamado criado com sucesso!');
     }
 
     /**
