@@ -49,13 +49,15 @@ class ChamadoController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        //dd(Auth::id(), Auth::check()); // **IMPORTANTE: Verifique se o usuário está autenticado!**
         $validated = $request->validate([ // Use $validated para pegar os dados validados
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
             'prioridade' => 'required|in:baixa,media,alta',
         ]);
 
-        Chamado::create([
+        // Captura a instância do Chamado criada
+        $chamado = Chamado::create([
             'user_id' => Auth::id(),
             'titulo' => $validated['titulo'], // Use $validated
             'descricao' => $validated['descricao'], // Use $validated
@@ -63,8 +65,9 @@ class ChamadoController extends Controller
             'status' => 'aberto', // **IMPORTANTE: Defina um status inicial aqui**
         ]);
 
-         return redirect()->route('chamados.show')
-                 ->with('success', 'Chamado criado com sucesso!');
+        // Agora $chamado está definida e você pode acessar seu id
+        return redirect()->route('chamados.show', $chamado->id)
+            ->with('success', 'Chamado criado com sucesso!');
     }
 
     /**
