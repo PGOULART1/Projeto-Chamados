@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chamado;
+use App\Models\Setor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect; // Pode remover se usar redirect()->route
@@ -36,9 +37,11 @@ class ChamadoController extends Controller
      *
      * @return View
      */
-    public function create(): View
+
+    public function create()
     {
-        return view('chamados.create');
+        $setores = Setor::all();
+        return view('chamados.create', compact('setores'));
     }
 
     /**
@@ -49,6 +52,12 @@ class ChamadoController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $chamado = Chamado::create([
+            'titulo' => $request->titulo,
+            'descricao' => $request->descricao,
+            'user_id' => auth()->id(),
+            'setor_id' => $request->setor_id,
+        ]);
         //dd(Auth::id(), Auth::check()); // **IMPORTANTE: Verifique se o usuário está autenticado!**
         $validated = $request->validate([ // Use $validated para pegar os dados validados
             'titulo' => 'required|string|max:255',
@@ -159,4 +168,6 @@ class ChamadoController extends Controller
 
         return redirect()->route('chamados.index')->with('success', 'Chamado excluído com sucesso!');
     }
+
+
 }

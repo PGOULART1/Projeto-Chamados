@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chamados', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // ID do chamado
             $table->unsignedBigInteger('user_id'); // ID do usuário que criou o chamado
             /*$table->unsignedBigInteger('tecnico_id')->nullable(); // ID do técnico responsável pelo chamado*/
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Chave estrangeira para o usuário que criou o chamado

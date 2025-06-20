@@ -12,24 +12,33 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="titulo" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Título</label>
-                        <input type="text" name="titulo" id="titulo" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600" required autofocus>
+                        <label for="titulo"
+                            class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Título</label>
+                        <input type="text" name="titulo" id="titulo"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600"
+                            required autofocus>
                         @error('titulo')
                             <p class="text-red-500 text-xs italic mt-2 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="descricao" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Descrição</label>
-                        <textarea name="descricao" id="descricao" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600" required></textarea>
+                        <label for="descricao"
+                            class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Descrição</label>
+                        <textarea name="descricao" id="descricao" rows="5"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600"
+                            required></textarea>
                         @error('descricao')
                             <p class="text-red-500 text-xs italic mt-2 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="prioridade" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Prioridade</label>
-                        <select name="prioridade" id="prioridade" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="prioridade"
+                            class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Prioridade</label>
+                        <select name="prioridade" id="prioridade"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600"
+                            required>
                             <option value="baixa">Baixa</option>
                             <option value="media" selected>Média</option>
                             <option value="alta">Alta</option>
@@ -40,19 +49,35 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="anexos" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Anexos (opcional)</label>
-                        <input type="file" name="anexos[]" id="anexos" multiple class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600">
+                        <label for="setor_id" class="block font-medium text-sm text-gray-700">Setor</label>
+                        <select name="setor_id" id="setor_id" required
+                            class="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200">
+                            <option value="">Selecione o setor</option>
+                            @foreach($setores as $setor)
+                                <option value="{{ $setor->id }}">{{ $setor->nome }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="anexos" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Anexos
+                            (opcional)</label>
+                        <input type="file" name="anexos[]" id="anexos" multiple
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600">
                         @error('anexos')
                             <p class="text-red-500 text-xs italic mt-2 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <a href="{{ route('dashboard') }}" class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+                        <a href="{{ route('dashboard') }}"
+                            class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
                             Voltar
                         </a>
 
-                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <button type="submit"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Criar Chamado
                         </button>
                     </div>

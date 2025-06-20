@@ -17,6 +17,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    const ROLE_USER = 'user';
+    const ROLE_TECNICO = 'tecnico';
+    const ROLE_ADMIN = 'admin';
+
+
+
+
     protected $fillable = [
         'name',
         'email',
@@ -45,5 +52,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Método auxiliar para verificar se o usuário é admin
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    // Método auxiliar para verificar se o usuário é técnico
+    public function isTecnico(): bool
+    {
+        return $this->role === 'tecnico';
     }
 }

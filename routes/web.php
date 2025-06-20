@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\SetorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,9 @@ Route::middleware('auth')->group(function () {
     // A rota para o store de anexo seria /chamados/{chamado}/anexos
     // A rota para o delete seria /chamados/{chamado}/anexos/{anexo}
     });
+    Route::get('/chamado/{id}/chat', [ChatController::class, 'abrirChat'])->name('chat.chamado');
+    Route::post('/chamado/{id}/chat', [ChatController::class, 'enviarMensagem'])->name('chat.enviar');
+    Route::post('/setores', [SetorController::class, 'store'])->name('setores.store');
 });
 
 require __DIR__.'/auth.php';

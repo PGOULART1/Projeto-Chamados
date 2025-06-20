@@ -67,13 +67,13 @@ class AnexoController extends Controller
 
             // Armazena o arquivo em storage/app/public/chamados/ID_DO_CHAMADO/
             // Usa o nome de arquivo gerado
-            $path = $uploadedFile->storeAs('public/chamados/' . $chamado->id_chamado, $fileName, 'public');
+            $path = $uploadedFile->storeAs('chamados/' . $chamado->id_chamado, $fileName, 'public');
 
             // Cria um novo registro de Anexo no banco de dados
             $anexo = new Anexo();
             $anexo->id_chamado = $chamado->id_chamado;
             $anexo->nome_arquivo = $uploadedFile->getClientOriginalName(); // Nome original para exibição
-            $anexo->file_path = Storage::url($path); // Salva o URL público acessível
+            $anexo->file_path = $path; // Salva o caminho relativo diretamente
             $anexo->mime_type = $uploadedFile->getMimeType();
             $anexo->size = $uploadedFile->getSize();
             $anexo->save();
